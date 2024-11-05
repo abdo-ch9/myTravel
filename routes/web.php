@@ -5,6 +5,8 @@ use App\Http\Controllers\auth;
 use App\Http\Controllers\indexController;
 use App\Http\Controllers\reservationController;
 use App\Http\Middleware\isAdmin;
+use App\Http\Middleware\isadmindelete;
+use App\Http\Middleware\islogged;
 use Illuminate\Support\Facades\Route;
 
 //auth
@@ -16,20 +18,21 @@ Route::post('/logout', [auth::class, 'logout'])->name('logout');
 
 //users pages
 Route::get('/', [indexController::class, "index"])->name("dashboardUser");
+Route::get("/user/profile", [indexController::class, "userprofile"])->name("userprofile");
 Route::get("/aboutUs", [indexController::class, "aboutus"])->name("aboutUsUser");
 //user services
 Route::get("/services", [indexController::class, "services"])->name("servicesUser");
 Route::get("/services/safaris", [indexController::class, "servicessafaris"])->name("servicesUsersafaris");
 Route::get("/services/trekking", [indexController::class, "servicestrekking"])->name("servicesUsertrekking");
 Route::get("/services/beach", [indexController::class, "servicesbeach"])->name("servicesUserbeach");
-//reservation
-Route::get("/reservation", [reservationController::class, "index"])->name("reservationUser");
-Route::post("/reservation/store", [reservationController::class, "reservationStore"])->name("storereservationUser");
-Route::get('/reservation/{id}', [reservationController::class,  "reservationShow"])->name("ShowreservationUser");
-Route::get("/reservation/{id}/edit", [reservationController::class, "editreservation"])->name("editreservationUser");
-Route::put("/reservation/{id}/update", [reservationController::class, "updatereservation"])->name("updatereservationUser");
-Route::delete("/reservation/{id}/delete", [reservationController::class, "destroyreservation"])->name("deletereservationUser");
-//
+//////////////////////////////////////////////reservation/////////////////////////////////////////
+Route::get("/reservation", [reservationController::class, "index"])->name("reservationUser")->middleware(islogged::class);
+Route::post("/reservation/store", [reservationController::class, "reservationStore"])->name("storereservationUser")->middleware(islogged::class);
+Route::get('/reservation/{id}', [reservationController::class,  "reservationShow"])->name("ShowreservationUser")->middleware(islogged::class);
+Route::get("/reservation/{id}/edit", [reservationController::class, "editreservation"])->name("editreservationUser")->middleware(islogged::class);
+Route::put("/reservation/{id}/update", [reservationController::class, "updatereservation"])->name("updatereservationUser")->middleware(islogged::class);
+Route::delete("/reservation/{id}/delete", [reservationController::class, "destroyreservation"])->name("deletereservationUser")->middleware(isadmindelete::class);;
+//////////////////////////////////////////
 Route::get("/contactUs", [indexController::class, "contactUs"])->name("contactUsUser");
 //reviews
 Route::get("/reviews", [indexController::class, "reviews"])->name("reviewsUser");

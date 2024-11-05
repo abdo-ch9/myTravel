@@ -70,8 +70,10 @@
       <!-- //toggle switch for light and dark theme -->
 
       @if(Auth::check())
-      <aside style="padding: 25px; margin-left: 20px; float: left; max-width:200px">
-        <h2>Welcome, {{ Auth::user()->name }}!</h2>
+      <aside style="padding: 10px; margin-left: 20px; float: left; max-width:100px; text-wrap: nowrap;">
+        <span>
+          <h4 class="mb-0" style="color : white">Welcome, {{ Auth::user()->name }}!</h4>
+        </span>
         <ul>
           <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link active">Logout</a></li>
         </ul>

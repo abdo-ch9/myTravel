@@ -7,7 +7,7 @@
     <title>Wildlive Animals Category Bootstrap Responsive Web Template | Contact :: W3Layouts </title>
     <link href="//fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link rel="stylesheet" href="/assets/css/style-starter.css">
 </head>
 
 <body>
@@ -25,10 +25,99 @@
             </ul>
         </div>
     </section>
+    <div class="container my-5">
+        <h2 class="mb-4">Reservation Form</h2>
+
+        <form action="{{ route('updatereservationUser', $reservation->id) }}" method="post">
+    @csrf
+    @method("put")
+    
+    <!-- First Name -->
+    <div class="mb-3">
+        <label for="fname" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="fname" name="fname" value="{{ $reservation->fname }}">
+    </div>
+
+    <!-- Last Name -->
+    <div class="mb-3">
+        <label for="lname" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="lname" name="lname" value="{{ $reservation->lname }}">
+    </div>
+
+    <!-- Country of Residence -->
+    <div class="mb-3">
+        <label for="countryOfResidence" class="form-label">Country of Residence</label>
+        <input type="text" class="form-control" id="countryOfResidence" name="countryOfResidence" value="{{ $reservation->countryOfResidence }}">
+    </div>
+
+    <!-- Phone Number -->
+    <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Phone Number</label>
+        <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" value="{{ $reservation->phoneNumber }}">
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ $reservation->email }}">
+    </div>
+
+    <!-- Date of Reservation -->
+    <div class="mb-3">
+        <label for="dateReservation" class="form-label">Date of Reservation</label>
+        <input type="date" class="form-control" id="dateReservation" name="dateReservation" value="{{ $reservation->dateReservation }}">
+    </div>
+
+    <!-- Number of Nights -->
+    <div class="mb-3">
+        <label for="numberNight" class="form-label">Number of Nights</label>
+        <select class="form-select" id="numberNight" name="numberNight" style="padding:5px 70px; border-radius: 5px; display: block;">
+            <option selected disabled>Number of Nights</option>
+            @for ($i = 5; $i <= 10; $i++)
+                <option value="{{ $i }}" {{ $reservation->numberNight == $i ? 'selected' : '' }}>{{ $i }}</option>
+            @endfor
+        </select>
+    </div>
+
+    <!-- Number of Adults -->
+    <div class="mb-3">
+        <label for="numberOfAdults" class="form-label">Number of Adults</label>
+        <select class="form-select" id="numberOfAdults" name="numberOfAdults" style="padding:5px 70px; border-radius: 5px; display: block;">
+            <option selected disabled>Number of Adults (over 18)</option>
+            @for ($i = 1; $i <= 9; $i++)
+                <option value="{{ $i }}" {{ $reservation->numberOfAdults == $i ? 'selected' : '' }}>{{ $i }}</option>
+            @endfor
+        </select>
+    </div>
+
+    <!-- Number of Children -->
+    <div class="mb-3">
+        <label for="numberOfChilds" class="form-label">Number of Children</label>
+        <select class="form-select" id="numberOfChilds" name="numberOfChilds" style="padding:5px 70px; border-radius: 5px; display: block;">
+            <option selected disabled>Number of Children (under 18)</option>
+            @for ($i = 0; $i <= 8; $i++)
+                <option value="{{ $i }}" {{ $reservation->numberOfChilds == $i ? 'selected' : '' }}>{{ $i }}</option>
+            @endfor
+        </select>
+    </div>
+
+    <!-- How Did You Know About Us -->
+    <div class="mb-3">
+        <label for="howdiduknowaboutus" class="form-label">How Did You Know About Us?</label>
+        <input type="text" class="form-control" id="howdiduknowaboutus" name="howdiduknowaboutus" value="{{ $reservation->howdiduknowaboutus }}">
+    </div>
+
+    <!-- Submit Button -->
+    <p style="text-align: center;">
+        <button type="submit" class="btn btn-primary">Submit Reservation</button>
+    </p>
+</form>
+
+    </div>
     <!--//inner-page-->
 
 
-    
+
 
 
 
@@ -55,43 +144,9 @@
             document.documentElement.scrollTop = 0;
         }
     </script>
-  
-  @extends("layout.footer")
-    <!-- //copyright -->
-    <!-- Template JavaScript -->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/theme-change.js"></script>
 
-    <!--/MENU-JS-->
-    <script>
-        $(window).on("scroll", function() {
-            var scroll = $(window).scrollTop();
+    @extends("layout.footer")
 
-            if (scroll >= 80) {
-                $("#site-header").addClass("nav-fixed");
-            } else {
-                $("#site-header").removeClass("nav-fixed");
-            }
-        });
-
-        //Main navigation Active Class Add Remove
-        $(".navbar-toggler").on("click", function() {
-            $("header").toggleClass("active");
-        });
-        $(document).on("ready", function() {
-            if ($(window).width() > 991) {
-                $("header").removeClass("active");
-            }
-            $(window).on("resize", function() {
-                if ($(window).width() > 991) {
-                    $("header").removeClass("active");
-                }
-            });
-        });
-    </script>
-    <!--//MENU-JS-->
-
-    <script src="assets/js/bootstrap.min.js"></script>
 
 </body>
 

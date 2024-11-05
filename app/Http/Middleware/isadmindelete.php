@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class islogged
+class isadmindelete
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class islogged
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
+        if (Auth::user()->isAdmin !== 1) {
+            return redirect()->back()->with('error', "You can't delete this reservation.");
         }
         return $next($request);
     }

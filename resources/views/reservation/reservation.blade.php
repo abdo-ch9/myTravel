@@ -71,6 +71,13 @@
                 <label for="dateReservation" class="form-label">Date of Reservation</label>
                 <input type="date" class="form-control" id="dateReservation" name="dateReservation" required>
             </div>
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                <p style="color: black;">{{ $error }}</p>
+                @endforeach
+            </div>
+            @endif
 
             <!-- Number of Nights -->
             <div class="mb-3">
@@ -126,10 +133,12 @@
                 <label for="howdiduknowaboutus" class="form-label">How Did You Know About Us?</label>
                 <input type="text" class="form-control" id="howdiduknowaboutus" name="howdiduknowaboutus">
             </div>
-
             <!-- Submit Button -->
-            <p style="text-align: center;"><button type="submit" class="btn btn-primary">Submit Reservation</button></p>
+            <p style="text-align: center;"><button type="submit" class="btn btn-primary">Submit Reservation</button>
+            </p>
         </form>
+
+
     </div>
     <!--//inner-page-->
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class indexController extends Controller
@@ -30,13 +31,18 @@ class indexController extends Controller
     {
         return view("home.beach");
     }
-   
-    public function contactUs(){
+    public function userprofile($id)
+    {
+        $user = User::find($id);
+        return view("home.userProfile"  , ["user"=>$user]);
+    }
+    public function contactUs()
+    {
         return view("home.contact");
     }
-    public function reviews(){
+    public function reviews()
+    {
         return view('home.reviews');
     }
-    public function addreviews(){
-    }
+    public function addreviews() {}
 }

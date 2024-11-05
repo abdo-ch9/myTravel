@@ -17,5 +17,6 @@ class reservation extends Model
         'numberOfAdults',
         'numberOfChilds',
         'howdiduknowaboutus',
+        "user_id"
     ];
 }
